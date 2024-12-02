@@ -13,7 +13,7 @@ class UserModel extends Model
         'admin',
     ];
 
-    protected $table         = 'user';
+    protected $table         = 'v_user';
     protected $allowedFields = [
         'name', 'email', 'password', 'avatar', 'role'
     ];

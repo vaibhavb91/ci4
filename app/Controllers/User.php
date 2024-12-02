@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Entities\Article;
+use App\Entities\Clients;
 use App\Entities\User as EntitiesUser;
-use App\Models\ArticleModel;
+use App\Models\ClientsModel;
 use App\Models\UserModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use Config\Services;
@@ -40,34 +40,34 @@ class User extends BaseController
 	}
 
 
-	public function article($page = 'list', $id = null)
+	public function clients($page = 'list', $id = null)
 	{
-		$model = new ArticleModel();
+		$model = new ClientsModel();
 		if ($this->login->role !== 'admin') {
 			$model->withUser($this->login->id);
 		}
 		if ($this->request->getMethod() === 'POST') {
 			if ($page === 'delete' && $model->delete($id)) {
-				return $this->response->redirect('/user/article/');
+				return $this->response->redirect('/user/clients/');
 			} else if ($id = $model->processWeb($id)) {
-				return $this->response->redirect('/user/article/');
+				return $this->response->redirect('/user/clients/');
 			}
 		}
 		switch ($page) {
 			case 'list':
-				return view('user/article/list', [
+				return view('user/clients/list', [
 					'data' => find_with_filter(empty($_GET['category']) ? $model : $model->withCategory($_GET['category'])),
-					'page' => 'article',
+					'page' => 'clients',
 				]);
 			case 'add':
-				return view('user/article/edit', [
-					'item' => new Article()
+				return view('user/clients/edit', [
+					'item' => new Clients()
 				]);
 			case 'edit':
 				if (!($item = $model->find($id))) {
 					throw new PageNotFoundException();
 				}
-				return view('user/article/edit', [
+				return view('user/clients/edit', [
 					'item' => $item
 				]);
 		}

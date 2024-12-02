@@ -4,12 +4,12 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateArticle extends Migration
+class CreateClients extends Migration
 {
     public function up()
     {
         $this->db->simpleQuery("
-        CREATE TABLE `article` (
+        CREATE TABLE `v_clients` (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
             `title` VARCHAR(255) NULL DEFAULT NULL,
             `content` MEDIUMTEXT NULL DEFAULT NULL,
@@ -23,7 +23,7 @@ class CreateArticle extends Migration
 
         // Fill the table
 
-        $this->db->table('article')->insertBatch([
+        $this->db->table('v_clients')->insertBatch([
             [
                 'id' => 1,
                 'title' => 'About Us',
@@ -84,6 +84,6 @@ class CreateArticle extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('article');
+        $this->forge->dropTable('v_clients');
     }
 }

@@ -46,14 +46,14 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="/" target="_blank" class="nav-link">
             <i class="nav-icon fas fa-globe"></i>
             <p>
               Website
             </p>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a href="/user/" class="nav-link <?= ($page ?? '') === 'dashboard' ? 'active' : '' ?>">
             <i class="nav-icon fas fa-home"></i>
@@ -63,11 +63,9 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="/user/article/" class="nav-link <?= ($page ?? '') === 'article' ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-scroll"></i>
-            <p>
-              Articles
-            </p>
+          <a href="/user/clients/" class="nav-link <?= ($page ?? '') === 'clients' ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-user"></i>
+            <p>Clients</p>
           </a>
         </li>
 

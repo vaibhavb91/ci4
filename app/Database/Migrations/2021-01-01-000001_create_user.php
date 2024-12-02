@@ -10,7 +10,7 @@ class CreateLogin extends Migration
     public function up()
     {
         $this->db->simpleQuery("
-        CREATE TABLE `user` (
+        CREATE TABLE `v_user` (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
             `name` VARCHAR(255) NULL DEFAULT NULL,
             `email` VARCHAR(255) NULL DEFAULT NULL,
@@ -25,7 +25,7 @@ class CreateLogin extends Migration
 
         // Fill the table
 
-        $this->db->table('user')->insertBatch([
+        $this->db->table('v_user')->insertBatch([
             [
                 'id' => 1,
                 'name' => 'My Admin',
@@ -44,6 +44,6 @@ class CreateLogin extends Migration
 
     public function down()
     {
-        $this->forge->dropTable('user');
+        $this->forge->dropTable('v_user');
     }
 }

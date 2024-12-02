@@ -9,11 +9,11 @@
       <div class="container" style="max-width: 720px;">
         <div class="card">
           <div class="card-body text-center">
-            <h1 class="mb-4">Welcome to Portal!</h1>
+            <h5 class="mb-4">Welcome to Portal!</h5>
             <div class="btn-group btn-block">
-              <a href="/user/article/" class="btn btn-outline-primary py-4">
+              <a href="/user/clients/" class="btn btn-outline-primary py-4">
                 <i class="fas fa-2x fa-info"></i><br>
-                Articles
+                Clients
               </a>
               <a href="/user/manage/" class="btn btn-outline-primary py-4">
                 <i class="fas fa-2x fa-users"></i><br>

@@ -9,7 +9,7 @@
 
       <div class="row justify-content-center">
         <div class="col-xl-8">
-          <?php /** @var \App\Entities\Article $item */ ?>
+          <?php /** @var \App\Entities\Clients $item */ ?>
           <div class="card">
             <div class="card-body">
               <main>

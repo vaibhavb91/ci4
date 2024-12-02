@@ -16,7 +16,7 @@ use CodeIgniter\I18n\Time;
  * @property Time $created_at
  * @property Time $updated_at
  */
-class Article extends Entity
+class Clients extends Entity
 {
     protected $casts = [
         'id' => 'integer',

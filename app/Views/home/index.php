@@ -26,7 +26,7 @@
               <div class="card-body">
                 <h3><?= ucfirst($cat) ?></h3>
                 <?php foreach ($$cat as $item) : ?>
-                  <a href="/article/<?= $item->id ?>" class="btn btn-lg btn-link text-left"><?= $item->title ?></a>
+                  <a href="/clients/<?= $item->id ?>" class="btn btn-lg btn-link text-left"><?= $item->title ?></a>
                   <div class="text-gray ml-4"><?= $item->updated_at->toDateString() ?></div>
                   <hr>
                 <?php endforeach ?>

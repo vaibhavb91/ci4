@@ -3,23 +3,23 @@
 namespace App\Controllers;
 
 use App\Libraries\Recaptha;
-use App\Models\ArticleModel;
+use App\Models\ClientsModel;
 use App\Models\UserModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\Files\Exceptions\FileNotFoundException;
 
 class Home extends BaseController
 {
-	public function index()
-	{
-		return view('home/index', [
-			'news' => find_with_filter((new ArticleModel())->withCategory('news'), 2),
-			'info' => find_with_filter((new ArticleModel())->withCategory('info'), 2),
-			'page' => 'home',
-		]);
-	}
+	// public function index()
+	// {
+	// 	return view('home/index', [
+	// 		'news' => find_with_filter((new ArticleModel())->withCategory('news'), 2),
+	// 		'info' => find_with_filter((new ArticleModel())->withCategory('info'), 2),
+	// 		'page' => 'home',
+	// 	]);
+	// }
 
-	public function login()
+	public function index()
 	{
 		if ($this->session->has('login')) {
 			return $this->response->redirect('/user/');
@@ -77,19 +77,19 @@ class Home extends BaseController
 		}
 	}
 
-	public function article($id = null)
+	public function clients($id = null)
 	{
 		if ($id === 'about') $id = 1;
 		else if ($id === 'faq') $id = 2;
 		else if ($id === 'contact') $id = 3;
 
-		$model = new ArticleModel();
+		$model = new ClientsModel();
 		if ($id === null) {
-			return view('home/article/list', [
+			return view('home/clients/list', [
 				'data' => $model->findAll(),
 			]);
 		} else if ($item = $model->find($id)) {
-			return view('home/article/view', [
+			return view('home/clients/view', [
 				'item' => $item,
 				'page' => $item->category,
 			]);
@@ -100,8 +100,8 @@ class Home extends BaseController
 
 	public function category($name = null)
 	{
-		$model = new ArticleModel();
-		return view('home/article/list', [
+		$model = new ClientsModel();
+		return view('home/clients/list', [
 			'data' => $model->withCategory($name)->findAll(),
 			'page' => $name,
 		]);
@@ -109,11 +109,11 @@ class Home extends BaseController
 
 	public function search()
 	{
-		$model = new ArticleModel();
+		$model = new ClientsModel();
 		if ($q = $this->request->getGet('q')) {
 			$model->withSearch($q);
 		}
-		return view('home/article/list', [
+		return view('home/clients/list', [
 			'data' => find_with_filter($model),
 			'page' => '',
 			'search' => $q,
