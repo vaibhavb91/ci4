@@ -10,7 +10,7 @@
       <div class="container">
         <div class="card">
           <div class="card-body">
-            <?php /** @var \App\Entities\Article[] $data */ ?>
+            <?php /** @var \App\Entities\Clients[] $data */ ?>
             <div class="d-flex">
              
               <div class="ml-auto">
@@ -24,14 +24,20 @@
             <?= view('shared/table', [
               'data' => $data,
               'columns' => [
-                'Title' => function (\App\Entities\Clients $x) {
-                  return $x->title;
+                'Id' => function (\App\Entities\Clients $x) {
+                  return $x->id;
                 },
-                'Author' => function (\App\Entities\Clients $x) {
-                  return $x->user->name;
+                'Name' => function (\App\Entities\Clients $x) {
+                  return $x->name;
                 },
-                'Updated' => function (\App\Entities\Clients $x) {
-                  return $x->updated_at;
+                'Mobile' => function (\App\Entities\Clients $x) {
+                  return $x->mobile_no;
+                },
+                'Address' => function (\App\Entities\Clients $x) {
+                  return $x->address;
+                },
+                'Email' => function (\App\Entities\Clients $x) {
+                  return $x->email;
                 },
                 'Edit' => function (\App\Entities\Clients $x) {
                   return view('shared/button', [
@@ -39,7 +45,16 @@
                     'target' => $x->id,
                     'size' => 'btn-sm'
                   ]);
-                }
+                },
+                'Delete' => function (\App\Entities\Clients $x) {
+      return '
+        <form method="POST" action="/user/clients/delete/' . $x->id . '" style="display:inline;" onsubmit="return confirm(\'Do you want to delete this client permanently?\')">
+          <button type="submit" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </form>
+      ';
+    }
               ]
             ]) ?>
             <?= view('shared/pagination') ?>
@@ -48,6 +63,7 @@
       </div>
     </div>
   </div>
+  
 </body>
 
 </html>

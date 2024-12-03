@@ -19,7 +19,19 @@ use CodeIgniter\I18n\Time;
 class Clients extends Entity
 {
     protected $casts = [
-        'id' => 'integer',
+        'id' => null,
+        'name' => null,
+        'birth_date' => null,
+        'age' => null,
+        'gender' => null,
+        'mobile_no' => null,
+        'alternative_no' => null,
+        'address' => null,
+        'state' => null,
+        'pincode' => null,
+        'email' => null,
+        'referred_by' => null,
+        'user_id' => null
     ];
 
     public function getUser()

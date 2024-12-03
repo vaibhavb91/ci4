@@ -11,7 +11,9 @@ class ClientsModel extends Model
    
     protected $table         = 'v_clients';
     protected $allowedFields = [
-        'title', 'content', 'category', 'user_id'
+        'name', 'birth_date', 'age', 'gender', 'mobile_no', 
+    'alternative_no', 'address', 'state', 'pincode', 
+    'email', 'referred_by', 'user_id'
     ];
     protected $primaryKey = 'id';
     protected $returnType = 'App\Entities\Clients';

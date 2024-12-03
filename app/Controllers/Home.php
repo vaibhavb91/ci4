@@ -27,6 +27,7 @@ class Home extends BaseController
 		if ($r = $this->request->getGet('r')) {
 			return $this->response->setCookie('r', $r, 0)->redirect('/login/');
 		}
+		
 		if ($this->request->getMethod() === 'POST') {
 			$post = $this->request->getPost();
 			if (isset($post['email'], $post['password'])) {
@@ -47,6 +48,8 @@ class Home extends BaseController
 		return view('home/login', [
 			'message' => $m ?? (($_GET['msg'] ?? '') === 'emailsent' ? lang('Interface.emailSent') : null)
 		]);
+
+		
 	}
 
 	public function register()
@@ -97,7 +100,16 @@ class Home extends BaseController
 			throw new PageNotFoundException();
 		}
 	}
-
+	public function delete($id)
+	{
+		// Perform deletion logic, e.g.:
+		$model = new ClientsModel();
+		$model->delete($id);
+	
+		// Redirect or return a response
+		return redirect()->to('/user/clients')->with('success', 'Client deleted successfully.');
+	}
+	
 	public function category($name = null)
 	{
 		$model = new ClientsModel();
@@ -108,17 +120,33 @@ class Home extends BaseController
 	}
 
 	public function search()
-	{
-		$model = new ClientsModel();
-		if ($q = $this->request->getGet('q')) {
-			$model->withSearch($q);
-		}
-		return view('home/clients/list', [
-			'data' => find_with_filter($model),
-			'page' => '',
-			'search' => $q,
-		]);
-	}
+{
+    $model = new ClientsModel();
+    
+    // Get the search query
+    $q = $this->request->getGet('q');
+    
+    if ($q) {
+        $model->like('name', $q)
+              ->orLike('email', $q)
+              ->orLike('mobile_no', $q);
+    }
+    
+    // Pagination setup
+    $perPage = 10; // Items per page
+    $currentPage = $this->request->getGet('page') ?? 1;
+
+    // Fetch paginated data
+    $data = $model->paginate($perPage, 'clients', $currentPage);
+
+    return view('home/clients/list', [
+        'data' => $data,
+        'pager' => $model->pager,
+        'page' => '',
+        'search' => $q,
+    ]);
+}
+
 
 	public function uploads($directory, $file)
 	{

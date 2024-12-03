@@ -11,14 +11,17 @@ class CreateClients extends Migration
         $this->db->simpleQuery("
         CREATE TABLE `v_clients` (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
-            `title` VARCHAR(255) NULL DEFAULT NULL,
-            `content` MEDIUMTEXT NULL DEFAULT NULL,
-            `category` VARCHAR(50) NULL DEFAULT NULL,
-            `user_id` INT(11) NULL DEFAULT NULL,
-            `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
-            `updated_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
-            PRIMARY KEY (`id`),
-            INDEX `category` (`category`)
+            `name` VARCHAR(100) NULL DEFAULT NULL AFTER `id`,
+         `birth_date` DATE NULL DEFAULT NULL AFTER `name`,
+         `age` INT(11) NULL DEFAULT NULL AFTER `birth_date`,
+         `gender` VARCHAR(10) NULL DEFAULT NULL AFTER `age`,
+         `mobile_no` VARCHAR(15) NULL DEFAULT NULL AFTER `gender`,
+         `alternative_no` VARCHAR(15) NULL DEFAULT NULL AFTER `mobile_no`,
+         `address` VARCHAR(255) NULL DEFAULT NULL AFTER `alternative_no`,
+         `state` VARCHAR(50) NULL DEFAULT NULL AFTER `address`,
+         `pincode` VARCHAR(10) NULL DEFAULT NULL AFTER `state`,
+         `email` VARCHAR(100) NULL DEFAULT NULL AFTER `pincode`,
+         `referred_by` VARCHAR(255) NULL DEFAULT NULL AFTER `email`;
         )");
 
         // Fill the table
@@ -29,55 +32,64 @@ class CreateClients extends Migration
                 'title' => 'About Us',
                 'content' => '<p>This is a template</p>',
                 'category' => 'page',
-                'user_id' => 1,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 2,
                 'title' => 'FAQ',
                 'content' => '<p>This is a template</p>',
                 'category' => 'page',
-                'user_id' => 1,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 3,
                 'title' => 'Contact',
                 'content' => '<p>This is a template</p>',
                 'category' => 'page',
-                'user_id' => 1,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 4,
                 'title' => 'Privacy',
                 'content' => '<p>This is a template</p>',
                 'category' => 'page',
-                'user_id' => 1,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 5,
                 'title' => 'Service',
                 'content' => '<p>This is a template</p>',
                 'category' => 'page',
-                'user_id' => 1,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 6,
                 'title' => 'Info 1',
                 'content' => '<p>This is a template</p>',
                 'category' => 'info',
-                'user_id' => 2,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 7,
                 'title' => 'Info 2',
                 'content' => '<p>This is a template</p>',
                 'category' => 'info',
-                'user_id' => 2,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 8,
                 'title' => 'News 1',
                 'content' => '<p>This is a template</p>',
                 'category' => 'news',
-                'user_id' => 2,
+                                'user_id' => 1,
+
             ],  [
                 'id' => 9,
                 'title' => 'News 2',
                 'content' => '<p>This is a template</p>',
                 'category' => 'news',
-                'user_id' => 2,
+                                'user_id' => 1,
+
             ]
         ]);
     }
