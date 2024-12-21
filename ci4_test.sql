@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 06:09 AM
+-- Generation Time: Dec 21, 2024 at 05:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -83,8 +83,36 @@ INSERT INTO `v_clients` (`id`, `name`, `birth_date`, `age`, `gender`, `mobile_no
 (20, 'Rachel Green', '1986-01-20', 38, 'Female', '8899001122', '2233445566', '1717 Cypress St, City T', 'State T', '123456', 'rachel.g@example.com', 'Referral T', 20, '2024-12-03 03:46:28', '2024-12-03 03:46:28'),
 (21, 'Sam Fisher', '1991-07-22', 33, 'Male', '9900112233', '3344556677', '1818 Hickory St, City U', 'State U', '234567', 'sam.f@example.com', 'Referral U', 21, '2024-12-03 03:46:28', '2024-12-03 03:46:28'),
 (22, 'Tina Goldstein', '1995-12-11', 29, 'Female', '0011223344', '4455667788', '1919 Chestnut St, City V', 'State V', '345789', 'tina.g@example.com', 'Referral V', 22, '2024-12-03 03:46:28', '2024-12-03 03:46:28'),
-(23, 'Uma Thurman', '1988-03-15', 36, 'Female', '1122334455', '5566778899', '2020 Maple St, City W', 'State W', '678901', 'uma.t@example.com', 'Referral W', 23, '2024-12-03 03:46:28', '2024-12-03 03:46:28'),
-(24, 'Victor Stone1', '1994-04-28', 31, 'Male', '2233445566', '6655443322', '2121 Elm St, City X', '', '876123', 'victor.s@example.com', 'Referral X', 24, '2024-12-03 03:46:28', '2024-12-02 23:19:24');
+(23, 'Uma Thurman', '1988-03-15', 36, 'Female', '1122334455', '5566778899', '2020 Maple St, City W', 'State W', '678901', 'uma.t@example.com', 'Referral W', 23, '2024-12-03 03:46:28', '2024-12-03 03:46:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `v_sales`
+--
+
+CREATE TABLE `v_sales` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `service_details` text NOT NULL,
+  `cash_type` enum('online','cash','check','other') NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `gst_amount` decimal(10,2) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `mobile_no` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `v_sales`
+--
+
+INSERT INTO `v_sales` (`id`, `date`, `client_id`, `service_details`, `cash_type`, `amount`, `gst_amount`, `total`, `address`, `mobile_no`) VALUES
+(1, '2024-11-04', 7, 'e4g44g', 'check', 100000.00, 4567.00, 104567.00, 'Address Example 5', '9876504321'),
+(2, '2024-11-07', 1, 'fvnhufhh', 'check', 50000.00, 4856.00, 54856.00, 'Nashik', '09763715014'),
+(3, '2024-11-12', 7, '4555', 'check', 1235.00, 34.00, 1269.00, 'Address Example 5', '9876504321'),
+(4, '2024-12-21', 12, 'demo', 'check', 100000.00, 4755.00, 456626.00, 'nashik', '9763715014');
 
 -- --------------------------------------------------------
 
@@ -127,6 +155,13 @@ ALTER TABLE `v_clients`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `v_sales`
+--
+ALTER TABLE `v_sales`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
 -- Indexes for table `v_user`
 --
 ALTER TABLE `v_user`
@@ -145,10 +180,26 @@ ALTER TABLE `v_clients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `v_sales`
+--
+ALTER TABLE `v_sales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `v_user`
 --
 ALTER TABLE `v_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `v_sales`
+--
+ALTER TABLE `v_sales`
+  ADD CONSTRAINT `v_sales_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `v_clients` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

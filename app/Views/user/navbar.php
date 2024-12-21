@@ -68,6 +68,12 @@
             <p>Clients</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="/user/sales/" class="nav-link <?= ($page ?? '') === 'sales' ? 'active' : '' ?>">
+          <i class="nav-icon fas fa-dollar-sign"></i>
+            <p>Sell</p>
+          </a>
+        </li>
 
         <?php if (\Config\Services::login()->role === 'admin') : ?>
           <li class="nav-item">

@@ -101,14 +101,19 @@ class Home extends BaseController
 		}
 	}
 	public function delete($id)
-	{
-		// Perform deletion logic, e.g.:
-		$model = new ClientsModel();
-		$model->delete($id);
-	
-		// Redirect or return a response
-		return redirect()->to('/user/clients')->with('success', 'Client deleted successfully.');
-	}
+{
+    $model = new ClientsModel();
+    try {
+        if ($model->delete($id)) {
+            return redirect()->to('/user/clients')->with('success', 'Client deleted successfully.');
+        } else {
+            return redirect()->to('/user/clients')->with('error', 'Client could not be deleted.');
+        }
+    } catch (\Exception $e) {
+        return redirect()->to('/user/clients')->with('error', 'An error occurred: ' . $e->getMessage());
+    }
+}
+
 	
 	public function category($name = null)
 	{
@@ -137,11 +142,12 @@ class Home extends BaseController
     $currentPage = $this->request->getGet('page') ?? 1;
 
     // Fetch paginated data
-    $data = $model->paginate($perPage, 'clients', $currentPage);
+	$data = $model->paginate(10, 'clients');
+	$pager = $model->pager; 
 
     return view('home/clients/list', [
         'data' => $data,
-        'pager' => $model->pager,
+        'pager' =>  $pager,
         'page' => '',
         'search' => $q,
     ]);

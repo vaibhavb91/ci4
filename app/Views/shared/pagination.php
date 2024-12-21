@@ -4,6 +4,8 @@
             $p = $_GET;
             unset($p['page']);
             $p = '?'.http_build_query($p).'&page=';
+
+            echo $_SERVER['pagination']['max']; 
         ?>
         <?php if ($_SERVER['pagination']['page'] > 2) : ?>
             <div class="page-item"><a class="page-link" href="<?= $p ?>1">1</a></div>

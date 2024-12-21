@@ -137,4 +137,50 @@ class User extends BaseController
 			'page' => 'profile',
 		]);
 	}
+
+public function sales($page = 'list', $id = null)
+{
+    $salesModel = new \App\Models\SalesModel(); // Sales model for sales data
+    $clientsModel = new \App\Models\ClientsModel(); // Clients model for clients data
+
+    if ($this->login->role !== 'admin') {
+        $salesModel->withUser($this->login->id);
+    }
+
+    if ($this->request->getMethod() === 'POST') {
+        if ($page === 'delete' && $salesModel->delete($id)) {
+            return $this->response->redirect('/user/sales/');
+        } else if ($id = $salesModel->processWeb($id)) {
+            return $this->response->redirect('/user/sales/');
+        }
+    }
+
+    switch ($page) {
+        case 'list':
+            return view('user/sales/list', [
+                'data' => find_with_filter($salesModel),
+                'page' => 'sales',
+            ]);
+
+        case 'add':
+            return view('user/sales/edit', [
+                'item' => new \App\Entities\Sales(),
+                'clients' => $clientsModel->findAll() // Pass clients to the view
+            ]);
+
+        case 'edit':
+            if (!($item = $salesModel->find($id))) {
+                throw new \CodeIgniter\Exceptions\PageNotFoundException();
+            }
+            return view('user/sales/edit', [
+                'item' => $item,
+                'clients' => $clientsModel->findAll() // Pass clients to the view
+            ]);
+    }
+
+    throw new \CodeIgniter\Exceptions\PageNotFoundException();
+}
+
+
+	
 }

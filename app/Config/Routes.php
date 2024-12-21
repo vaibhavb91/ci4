@@ -7,5 +7,6 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->add('/user/', 'User::index');
+$routes->add('/user/sales', 'User::sales'); 
 $routes->add('/user/(:any)', 'User::$1');
 $routes->add('/(:any)', 'Home::$1');
